@@ -22,7 +22,10 @@ let package = Package(
 			url: "https://github.com/germ-network/GermConvenience.git",
 			from: "0.0.2"
 		),
-		.package(path: "../AtprotoClient"),
+		.package(
+			url: "https://github.com/germ-network/AtprotoClient.git",
+			branch: "main"
+		),
 	],
 	targets: [
 		// Targets are the basic building blocks of a package, defining a module or a test suite.
