@@ -5,6 +5,8 @@ import Foundation
 extension Lexicon.Blue.Microcosm.Identity {
 
 	public enum ResolveMiniDoc: XRPCRequest {
+		public static var acceptValue: String { "application/json" }
+
 		public static var nsid: Atproto.NSID { "blue.microcosm.identity.resolveMiniDoc" }
 
 		public struct Result: Sendable, Codable {
