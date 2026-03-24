@@ -1,13 +1,13 @@
 {
-  "originHash" : "625d5a216f52fdc09e342980c3bec96f75f4dd5fa830e2d4c230c7f096d3ae0d",
+  "originHash" : "9e2a22eaba9769729aac45879b4e5901c31dd6f6eed63ddc1cd8bcc91509f752",
   "pins" : [
     {
       "identity" : "atprotoclient",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/germ-network/AtprotoClient.git",
       "state" : {
-        "revision" : "de4a9c2585c584c38bb53bc4b01db67cee78b9be",
-        "version" : "0.0.3"
+        "revision" : "0bcc8e4eff2454e2042dbecdd3b18ac959b01346",
+        "version" : "0.0.4"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/germ-network/AtprotoTypes.git",
       "state" : {
-        "revision" : "fe1e36b7f0dd781cfbfd86b583cadf9bb4163f32",
-        "version" : "0.0.3"
+        "revision" : "dd6254f52468658d6d37ac8730be4ea6fbf870ca",
+        "version" : "0.0.4"
       }
     },
     {
