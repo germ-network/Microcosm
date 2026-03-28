@@ -38,18 +38,14 @@ extension Microcosm.Slingshot {
 			.appending(path: "/xrpc/" + X.nsid)
 			.appending(queryItems: parameters.asQueryItems())
 
-		let customHeaders: [HTTPField] = try {
-			if let proxy {
-				[.init(name: try .atprotoProxy.tryUnwrap, value: proxy)]
-			} else {
-				[]
-			}
-		}()
+		var headers = HTTPFields(dictionaryLiteral: (.accept, "application/json"))
 
-		let request = HTTPRequestBody(
-			url: requestURL,
-			method: .get,
-			customHeaders: customHeaders
+		if let proxy {
+			headers[try .atprotoProxy.tryUnwrap] = proxy
+		}
+
+		let request = BundledHTTPRequest(
+			request: .init(method: .get, url: requestURL, headerFields: headers)
 		)
 
 		let result = try await resourceFetcher.data(for: request)
