@@ -2,6 +2,7 @@ import AtprotoClient
 import AtprotoTypes
 import Foundation
 import GermConvenience
+import HTTPTypes
 
 extension Microcosm.Slingshot {
 	/// - Parameter service: URL?
@@ -32,19 +33,24 @@ extension Microcosm.Slingshot {
 		service: URL?,
 	) async throws -> X.Result {
 		let (serviceUrl, proxy) = try getServiceUrl(service: service)
-		var requestURL = serviceUrl.appending(path: "/xrpc/" + X.nsid)
-		requestURL = requestURL.appending(queryItems: parameters.asQueryItems())
+		let requestURL =
+			serviceUrl
+			.appending(path: "/xrpc/" + X.nsid)
+			.appending(queryItems: parameters.asQueryItems())
 
-		var request = URLRequest.createRequest(
+		let customHeaders: [HTTPField] = try {
+			if let proxy {
+				[.init(name: try .atprotoProxy.tryUnwrap, value: proxy)]
+			} else {
+				[]
+			}
+		}()
+
+		let request = HTTPRequestBody(
 			url: requestURL,
-			httpMethod: .get
+			method: .get,
+			customHeaders: customHeaders
 		)
-
-		if let proxy {
-			request.setValue(
-				proxy, forHTTPHeaderField: "atproto-proxy"
-			)
-		}
 
 		let result = try await resourceFetcher.data(for: request)
 			.success(
@@ -53,9 +59,9 @@ extension Microcosm.Slingshot {
 			)
 
 		switch result {
-		case .error(let errorStruct, let statusCode):
+		case .error(let errorStruct, let responseStatus):
 			throw Microcosm.Errors.requestFailed(
-				responseCode: statusCode,
+				responseStatus: responseStatus,
 				error: errorStruct.error
 			)
 		case .result(let result):

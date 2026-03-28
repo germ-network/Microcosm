@@ -79,7 +79,7 @@ extension Microcosm.SlingshotInterface {
 				return nil
 			} else {
 				throw Microcosm.Errors.requestFailed(
-					responseCode: 400, error: error)
+					responseStatus: .badRequest, error: error)
 			}
 		}
 	}

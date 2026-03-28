@@ -16,15 +16,18 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/germ-network/AtprotoTypes.git",
-			from: "0.0.4"
+			branch: "mark/http-types"
+				//			from: "0.0.4"
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
-			from: "0.0.2"
+			//			from: "0.0.2"
+			branch: "mark/http-types"
 		),
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.0.4"
+			//			from: "0.0.4"
+			branch: "mark/http-types"
 		),
 	],
 	targets: [
