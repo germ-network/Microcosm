@@ -1,5 +1,5 @@
 {
-  "originHash" : "3049907693527bb197a341ec515a44e5d9e0943eec804253260b731cc83b0b46",
+  "originHash" : "9a9de718ef1398b5ace6e939abc74fb33c40cd870a9c1f28ef56fe21cf009b9b",
   "pins" : [
     {
       "identity" : "atprotoclient",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/germ-network/AtprotoClient.git",
       "state" : {
         "branch" : "mark/http-types",
-        "revision" : "04fe0390eee8a89a3f6e6ffc2b8ea026dd08995f"
+        "revision" : "4b6cfb07f553793963a7341354305dac741bbb7b"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/germ-network/GermConvenience.git",
       "state" : {
         "branch" : "mark/http-types",
-        "revision" : "b246ae80744dc8b7f4203583f25ded37ab02dcf0"
+        "revision" : "3d2e37d1d4968104a8c6263f88a10079a1b9c465"
       }
     },
     {
