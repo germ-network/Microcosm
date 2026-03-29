@@ -7,7 +7,7 @@ import HTTPTypes
 extension Microcosm.Slingshot {
 	/// - Parameter service: URL?
 	/// - Returns: (serviceUrl: URL, proxy: String?)
-	private func getServiceUrl(service: URL?) throws -> (URL, String?) {
+	private func getServiceUrl(service: URL?) throws -> (URL, ProxyService?) {
 		let defaultService = try Microcosm.Slingshot.defaultServiceURL.tryUnwrap
 
 		guard let service else {
@@ -22,7 +22,13 @@ extension Microcosm.Slingshot {
 		let proxyHost = try defaultService.host(percentEncoded: true)
 			.tryUnwrap(Microcosm.Errors.improperServiceUrl)
 
-		return (url, "did:web:\(proxyHost)#slingshot")
+		return (
+			url,
+			.init(
+				did: .init(method: .web, identifier: proxyHost),
+				endpoint: "slingshot"
+			)
+		)
 	}
 
 	public func request<X: XRPCRequest>(
@@ -41,7 +47,7 @@ extension Microcosm.Slingshot {
 		)
 
 		if let proxy {
-			headers[try .atprotoProxy.tryUnwrap] = proxy
+			headers[try .atprotoProxy.tryUnwrap] = proxy.headerValue
 		}
 
 		let request = BundledHTTPRequest(
