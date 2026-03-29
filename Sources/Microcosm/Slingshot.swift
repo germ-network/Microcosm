@@ -45,9 +45,9 @@ extension Microcosm.SlingshotInterface {
 	// This feels like it should be in AtIdentifier as a static method?
 	private func fromIdentifier(_ identifier: String) throws -> AtIdentifier {
 		if identifier.starts(with: "did") {
-			return try AtIdentifier.did(.init(string: identifier))
+			.did( try .init(string: identifier) )
 		} else {
-			return AtIdentifier.handle(identifier)
+			.handle(identifier)
 		}
 	}
 
@@ -58,7 +58,7 @@ extension Microcosm.SlingshotInterface {
 	public func resolveMiniDoc(identifier: String) async throws -> Lexicon.Blue.Microcosm
 		.Identity.ResolveMiniDoc.Output?
 	{
-		return try await resolveMiniDoc(identifier: identifier, serviceUrl: nil)
+		try await resolveMiniDoc(identifier: identifier, serviceUrl: nil)
 	}
 
 	public func resolveMiniDoc(identifier: String, serviceUrl: URL?)
