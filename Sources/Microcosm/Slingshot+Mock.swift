@@ -10,7 +10,7 @@ extension Microcosm {
 			_: X.Type,
 			parameters: X.Parameters,
 			service: URL?
-		) async throws -> X.Result where X: XRPCRequest {
+		) async throws -> X.Output where X: XRPCRequest {
 			.mock()
 		}
 	}

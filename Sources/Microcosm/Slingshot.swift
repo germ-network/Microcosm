@@ -16,13 +16,13 @@ extension Microcosm {
 			_: X.Type,
 			parameters: X.Parameters,
 			service: URL?,
-		) async throws -> X.Result
+		) async throws -> X.Output
 
 		func resolveHandle(handle: String) async throws -> Atproto.DID
 		func resolveMiniDoc(identifier: String) async throws
-			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Result?
+			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 		func resolveMiniDoc(identifier: String, serviceUrl: URL?) async throws
-			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Result?
+			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	}
 }
 
@@ -56,14 +56,14 @@ extension Microcosm.SlingshotInterface {
 	}
 
 	public func resolveMiniDoc(identifier: String) async throws -> Lexicon.Blue.Microcosm
-		.Identity.ResolveMiniDoc.Result?
+		.Identity.ResolveMiniDoc.Output?
 	{
 		return try await resolveMiniDoc(identifier: identifier, serviceUrl: nil)
 	}
 
 	public func resolveMiniDoc(identifier: String, serviceUrl: URL?)
 		async throws
-		-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Result?
+		-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	{
 		let id = try fromIdentifier(identifier)
 
