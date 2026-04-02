@@ -20,19 +20,26 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
-			from: "0.0.2"
+			from: "0.1.0"
 		),
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.0.4"
+			//			from: "0.0.4"
+			branch: "mark/http-types"
 		),
+		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
 	targets: [
 		// Targets are the basic building blocks of a package, defining a module or a test suite.
 		// Targets can depend on other targets in this package and products from dependencies.
 		.target(
 			name: "Microcosm",
-			dependencies: ["AtprotoTypes", "AtprotoClient", "GermConvenience"]
+			dependencies: [
+				"AtprotoTypes",
+				"AtprotoClient",
+				"GermConvenience",
+				.product(name: "HTTPTypes", package: "swift-http-types"),
+			]
 		),
 		.testTarget(
 			name: "MicrocosmTests",

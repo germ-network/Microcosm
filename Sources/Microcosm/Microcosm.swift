@@ -5,6 +5,7 @@
 //  Created by Emelia @ Germ on 2/20/26.
 //
 import Foundation
+import HTTPTypes
 
 public enum Microcosm {
 	enum Errors: Error {
@@ -15,7 +16,7 @@ public enum Microcosm {
 		case improperServiceUrl
 		case couldntConstructUrl
 		case nonHTTPResponse
-		case requestFailed(responseCode: Int, error: String)
+		case requestFailed(responseStatus: HTTPResponse.Status, error: String)
 	}
 }
 
