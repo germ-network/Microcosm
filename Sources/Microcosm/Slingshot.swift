@@ -16,13 +16,13 @@ extension Microcosm {
 			_: X.Type,
 			parameters: X.Parameters,
 			service: URL?,
-		) async throws -> X.Result
+		) async throws -> X.Output
 
-		func resolveHandle(handle: String) async throws -> Atproto.DID
+		func resolve(handle: String) async throws -> Atproto.DID
 		func resolveMiniDoc(identifier: String) async throws
-			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Result?
+			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 		func resolveMiniDoc(identifier: String, serviceUrl: URL?) async throws
-			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Result?
+			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	}
 }
 
@@ -45,25 +45,25 @@ extension Microcosm.SlingshotInterface {
 	// This feels like it should be in AtIdentifier as a static method?
 	private func fromIdentifier(_ identifier: String) throws -> AtIdentifier {
 		if identifier.starts(with: "did") {
-			return try AtIdentifier.did(.init(string: identifier))
+			.did(try .init(string: identifier))
 		} else {
-			return AtIdentifier.handle(identifier)
+			.handle(identifier)
 		}
 	}
 
-	public func resolveHandle(handle: String) async throws -> AtprotoTypes.Atproto.DID {
+	public func resolve(handle: String) async throws -> AtprotoTypes.Atproto.DID {
 		throw Microcosm.Errors.notImplemented
 	}
 
 	public func resolveMiniDoc(identifier: String) async throws -> Lexicon.Blue.Microcosm
-		.Identity.ResolveMiniDoc.Result?
+		.Identity.ResolveMiniDoc.Output?
 	{
-		return try await resolveMiniDoc(identifier: identifier, serviceUrl: nil)
+		try await resolveMiniDoc(identifier: identifier, serviceUrl: nil)
 	}
 
 	public func resolveMiniDoc(identifier: String, serviceUrl: URL?)
 		async throws
-		-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Result?
+		-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	{
 		let id = try fromIdentifier(identifier)
 

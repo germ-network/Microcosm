@@ -7,7 +7,7 @@ import HTTPTypes
 extension Microcosm.Slingshot {
 	/// - Parameter service: URL?
 	/// - Returns: (serviceUrl: URL, proxy: String?)
-	private func getServiceUrl(service: URL?) throws -> (URL, String?) {
+	private func getServiceUrl(service: URL?) throws -> (URL, ProxyService?) {
 		let defaultService = try Microcosm.Slingshot.defaultServiceURL.tryUnwrap
 
 		guard let service else {
@@ -16,52 +16,45 @@ extension Microcosm.Slingshot {
 		}
 
 		// Using service proxying:
-		guard let url = URL(string: "/", relativeTo: service) else {
-			throw Microcosm.Errors.improperServiceUrl
-		}
+		let url = try URL(string: "/", relativeTo: service)
+			.tryUnwrap(Microcosm.Errors.improperServiceUrl)
 
-		guard let proxyHost = defaultService.host(percentEncoded: true) else {
-			throw Microcosm.Errors.improperServiceUrl
-		}
+		let proxyHost = try defaultService.host(percentEncoded: true)
+			.tryUnwrap(Microcosm.Errors.improperServiceUrl)
 
-		return (url, "did:web:\(proxyHost)#slingshot")
+		return (
+			url,
+			.init(
+				did: .init(method: .web, identifier: proxyHost),
+				endpoint: "slingshot"
+			)
+		)
 	}
 
 	public func request<X: XRPCRequest>(
 		_ xrpc: X.Type,
 		parameters: X.Parameters,
 		service: URL?,
-	) async throws -> X.Result {
+	) async throws -> X.Output {
 		let (serviceUrl, proxy) = try getServiceUrl(service: service)
 		let requestURL =
 			serviceUrl
 			.appending(path: "/xrpc/" + X.nsid)
 			.appending(queryItems: parameters.asQueryItems())
 
-		var headers = HTTPFields(dictionaryLiteral: (.accept, "application/json"))
+		var headers = HTTPFields(
+			dictionaryLiteral: (.accept, HTTPContentType.json.rawValue)
+		)
 
 		if let proxy {
-			headers[try .atprotoProxy.tryUnwrap] = proxy
+			headers[try .atprotoProxy.tryUnwrap] = proxy.headerValue
 		}
 
 		let request = BundledHTTPRequest(
 			request: .init(method: .get, url: requestURL, headerFields: headers)
 		)
 
-		let result = try await resourceFetcher.data(for: request)
-			.success(
-				decodeResult: X.Result.self,
-				orError: Lexicon.XRPCError.self
-			)
-
-		switch result {
-		case .error(let errorStruct, let responseStatus):
-			throw Microcosm.Errors.requestFailed(
-				responseStatus: responseStatus,
-				error: errorStruct.error
-			)
-		case .result(let result):
-			return result
-		}
+		return try await resourceFetcher.data(for: request)
+			.parse(X.self)
 	}
 }
