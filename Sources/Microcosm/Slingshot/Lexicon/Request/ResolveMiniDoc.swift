@@ -7,7 +7,9 @@ import HTTPTypes
 //https://slingshot.microcosm.blue/#tag/slingshot-specific-queries/GET/xrpc/blue.microcosm.identity.resolveMiniDoc
 extension Lexicon.Blue.Microcosm.Identity {
 	public enum ResolveMiniDoc: XRPCRequest {
-		public static var acceptValue: HTTPContentType { .json }
+		public static var outputEncoding: HTTPContentType {
+			.json
+		}
 
 		public static var nsid: Atproto.NSID { "blue.microcosm.identity.resolveMiniDoc" }
 

@@ -45,7 +45,7 @@ extension Microcosm.SlingshotInterface {
 	// This feels like it should be in AtIdentifier as a static method?
 	private func fromIdentifier(_ identifier: String) throws -> AtIdentifier {
 		if identifier.starts(with: "did") {
-			.did( try .init(string: identifier) )
+			.did(try .init(string: identifier))
 		} else {
 			.handle(identifier)
 		}
