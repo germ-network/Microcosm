@@ -18,7 +18,7 @@ extension Microcosm {
 			service: URL?,
 		) async throws -> X.Output
 
-		func resolve(handle: String) async throws -> Atproto.DID
+		func resolve(handle: String) async throws -> Atproto.DID?
 		func resolveMiniDoc(identifier: String) async throws
 			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 		func resolveMiniDoc(identifier: String, serviceUrl: URL?) async throws
@@ -51,8 +51,11 @@ extension Microcosm.SlingshotInterface {
 		}
 	}
 
-	public func resolve(handle: String) async throws -> AtprotoTypes.Atproto.DID {
-		throw Microcosm.Errors.notImplemented
+	public func resolve(handle: String) async throws -> AtprotoTypes.Atproto.DID? {
+		return try await resolveMiniDoc(
+			identifier: handle,
+			serviceUrl: nil
+		)?.did
 	}
 
 	public func resolveMiniDoc(identifier: String) async throws -> Lexicon.Blue.Microcosm
