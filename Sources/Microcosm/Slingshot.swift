@@ -51,7 +51,7 @@ extension Microcosm.SlingshotInterface {
 		}
 	}
 
-	public func resolve(handle: String) async throws -> AtprotoTypes.Atproto.DID? {
+	public func resolveHandle(_ handle: AtIdentifier.Handle) async throws -> AtprotoTypes.Atproto.DID? {
 		throw Microcosm.Errors.notImplemented
 	}
 
