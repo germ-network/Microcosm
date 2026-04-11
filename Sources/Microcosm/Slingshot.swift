@@ -17,7 +17,7 @@ extension Microcosm {
 			parameters: X.Parameters,
 			service: URL?,
 		) async throws -> X.Output
-
+//Following https://docs.bsky.app/docs/api/com-atproto-identity-resolve-handle
 		func resolve(handle: String) async throws -> Atproto.DID?
 		func resolveMiniDoc(identifier: String) async throws
 			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
