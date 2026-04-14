@@ -15,7 +15,7 @@ extension Lexicon.Blue.Microcosm.Identity {
 
 		public struct Output: Sendable, Codable {
 			public let did: Atproto.DID
-			public let handle: AtIdentifier.Handle
+			public let handle: Atproto.Handle
 			public let pds: URL
 			public let signingKey: String
 
