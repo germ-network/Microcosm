@@ -1,5 +1,11 @@
 # @germ-network/microcosm
 
+## 0.2.0
+
+### Minor Changes
+
+- [#8](https://github.com/germ-network/Microcosm/pull/8) [`d3669b8`](https://github.com/germ-network/Microcosm/commit/d3669b81e7b60fdf1d9e594040ee55a8a5e0469b) Thanks [@germ-mark](https://github.com/germ-mark)! - sync types with updated AtprotoTypes and AtprotoClient changes
+
 ## 0.1.0
 
 ### Minor Changes
