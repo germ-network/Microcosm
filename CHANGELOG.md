@@ -1,5 +1,11 @@
 # @germ-network/microcosm
 
+## 0.3.0
+
+### Minor Changes
+
+- [#7](https://github.com/germ-network/Microcosm/pull/7) [`e40f420`](https://github.com/germ-network/Microcosm/commit/e40f4205485a2b8abdd3d0ab2b21371c7c4436ae) Thanks [@anna-germ](https://github.com/anna-germ)! - Update always-throwing Slingshot handle resolve to have optional return type (to satisfy Resolver protocol)
+
 ## 0.2.0
 
 ### Minor Changes
