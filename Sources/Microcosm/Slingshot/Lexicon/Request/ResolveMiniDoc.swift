@@ -63,3 +63,21 @@ extension Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output: Mockable {
 		)
 	}
 }
+
+extension Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output {
+	public var didDocument: Atproto.DIDDocument {
+		.init(
+			context: [],
+			id: did.stringRepresentation,
+			alsoKnownAs: ["at://" + handle],
+			verificationMethod: [],
+			service: [
+				.init(
+					id: "#atproto_pds",
+					type: "AtprotoPersonalDataServer",
+					serviceEndpoint: pds
+				)
+			]
+		)
+	}
+}
