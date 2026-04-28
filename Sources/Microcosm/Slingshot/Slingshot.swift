@@ -15,14 +15,10 @@ extension Microcosm {
 		func request<X: Atproto.XRPC.Request>(
 			_: X.Type,
 			parameters: X.Parameters,
-			service: URL?,
 		) async throws -> X.Output
 
 		func resolveHandle(_: Atproto.Handle) async throws -> Atproto.DID?
 		func resolveMiniDoc(identifier: LexiconString.AtIdentifier) async throws
-			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
-		func resolveMiniDoc(identifier: LexiconString.AtIdentifier, serviceUrl: URL?)
-			async throws
 			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	}
 }
@@ -40,7 +36,26 @@ extension Microcosm {
 	}
 }
 
+extension Microcosm.Slingshot: Atproto.XRPC.Callable {
+	public func response(
+		_ requestComponents: XRPCRequestComponents
+	) async throws -> HTTPDataResponse {
+		let defaultService = try Self.defaultServiceURL.tryUnwrap
+		let request =
+			try requestComponents
+			.constructUrl(serviceUrl: defaultService)
+		return try await resourceFetcher.data(for: request)
+	}
+
+}
+
 extension Microcosm.Slingshot: Microcosm.SlingshotInterface {
+	public func request<X>(
+		_: X.Type,
+		parameters: X.Parameters
+	) async throws -> X.Output where X: AtprotoTypes.Atproto.XRPC.Request {
+		try await call(X.self, parameters: parameters)
+	}
 }
 
 extension Microcosm.SlingshotInterface {
@@ -48,23 +63,14 @@ extension Microcosm.SlingshotInterface {
 		throw Microcosm.Errors.notImplemented
 	}
 
-	public func resolveMiniDoc(identifier: LexiconString.AtIdentifier) async throws -> Lexicon
-		.Blue.Microcosm
-		.Identity.ResolveMiniDoc.Output?
-	{
-		try await resolveMiniDoc(identifier: identifier, serviceUrl: nil)
-	}
-
-	public func resolveMiniDoc(identifier: LexiconString.AtIdentifier, serviceUrl: URL?)
+	public func resolveMiniDoc(identifier: LexiconString.AtIdentifier)
 		async throws
 		-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	{
 		do {
 			return try await request(
 				Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.self,
-				parameters: Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc
-					.Parameters(identifier: identifier),
-				service: serviceUrl,
+				parameters: .init(identifier: identifier),
 			)
 		} catch Microcosm.Errors.requestFailed(400, let error) {
 			if error == "RecordNotFound" {

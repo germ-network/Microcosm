@@ -11,8 +11,7 @@ extension Microcosm {
 
 		public func request<X>(
 			_: X.Type,
-			parameters: X.Parameters,
-			service: URL?
+			parameters: X.Parameters
 		) async throws -> X.Output where X: Atproto.XRPC.Request {
 			if let mockableType = X.self as? Mockable.Type {
 				return try (mockableType.mock() as? X.Output).tryUnwrap
