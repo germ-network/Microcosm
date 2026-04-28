@@ -12,16 +12,17 @@ import GermConvenience
 
 extension Microcosm {
 	public protocol SlingshotInterface: Sendable {
-		func request<X: XRPCRequest>(
+		func request<X: Atproto.XRPC.Request>(
 			_: X.Type,
 			parameters: X.Parameters,
 			service: URL?,
 		) async throws -> X.Output
-		//Following https://docs.bsky.app/docs/api/com-atproto-identity-resolve-handle
-		func resolveHandle(_: String) async throws -> Atproto.DID?
-		func resolveMiniDoc(identifier: String) async throws
+
+		func resolveHandle(_: Atproto.Handle) async throws -> Atproto.DID?
+		func resolveMiniDoc(identifier: LexiconString.AtIdentifier) async throws
 			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
-		func resolveMiniDoc(identifier: String, serviceUrl: URL?) async throws
+		func resolveMiniDoc(identifier: LexiconString.AtIdentifier, serviceUrl: URL?)
+			async throws
 			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	}
 }
@@ -39,41 +40,30 @@ extension Microcosm {
 	}
 }
 
-extension Microcosm.Slingshot: Microcosm.SlingshotInterface {}
+extension Microcosm.Slingshot: Microcosm.SlingshotInterface {
+}
 
 extension Microcosm.SlingshotInterface {
-	// This feels like it should be in AtIdentifier as a static method?
-	private func fromIdentifier(_ identifier: String) throws -> AtIdentifier {
-		if identifier.starts(with: "did") {
-			.did(try .init(string: identifier))
-		} else {
-			.handle(identifier)
-		}
-	}
-
-	public func resolveHandle(_ handle: Atproto.Handle) async throws -> AtprotoTypes.Atproto
-		.DID?
-	{
+	public func resolveHandle(_ handle: Atproto.Handle) async throws -> AtprotoTypes.Atproto.DID? {
 		throw Microcosm.Errors.notImplemented
 	}
 
-	public func resolveMiniDoc(identifier: String) async throws -> Lexicon.Blue.Microcosm
+	public func resolveMiniDoc(identifier: LexiconString.AtIdentifier) async throws -> Lexicon
+		.Blue.Microcosm
 		.Identity.ResolveMiniDoc.Output?
 	{
 		try await resolveMiniDoc(identifier: identifier, serviceUrl: nil)
 	}
 
-	public func resolveMiniDoc(identifier: String, serviceUrl: URL?)
+	public func resolveMiniDoc(identifier: LexiconString.AtIdentifier, serviceUrl: URL?)
 		async throws
 		-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	{
-		let id = try fromIdentifier(identifier)
-
 		do {
 			return try await request(
 				Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.self,
 				parameters: Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc
-					.Parameters(identifier: id),
+					.Parameters(identifier: identifier),
 				service: serviceUrl,
 			)
 		} catch Microcosm.Errors.requestFailed(400, let error) {

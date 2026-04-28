@@ -7,7 +7,10 @@ import HTTPTypes
 extension Microcosm.Slingshot {
 	/// - Parameter service: URL?
 	/// - Returns: (serviceUrl: URL, proxy: String?)
-	private func getServiceUrl(service: URL?) throws -> (URL, ProxyService?) {
+	private func getServiceUrl(service: URL?) throws -> (
+		URL,
+		Atproto.Service?
+	) {
 		let defaultService = try Microcosm.Slingshot.defaultServiceURL.tryUnwrap
 
 		guard let service else {
@@ -31,7 +34,7 @@ extension Microcosm.Slingshot {
 		)
 	}
 
-	public func request<X: XRPCRequest>(
+	public func request<X: Atproto.XRPC.Request>(
 		_ xrpc: X.Type,
 		parameters: X.Parameters,
 		service: URL?,
@@ -39,7 +42,7 @@ extension Microcosm.Slingshot {
 		let (serviceUrl, proxy) = try getServiceUrl(service: service)
 		let requestURL =
 			serviceUrl
-			.appending(path: "/xrpc/" + X.nsid)
+			.appending(path: "/xrpc/" + X.Id.nsid.rawValue)
 			.appending(queryItems: parameters.asQueryItems())
 
 		var headers = HTTPFields(

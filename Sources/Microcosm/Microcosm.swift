@@ -8,7 +8,7 @@ import Foundation
 import HTTPTypes
 
 public enum Microcosm {
-	enum Errors: LocalizedError {
+	package enum Errors: LocalizedError {
 		case notImplemented
 		case unexpectedRecordType
 		case missingRecordValue
@@ -18,7 +18,7 @@ public enum Microcosm {
 		case nonHTTPResponse
 		case requestFailed(responseStatus: HTTPResponse.Status, error: String)
 
-		var errorDescription: String? {
+		package var errorDescription: String? {
 			switch self {
 			case .notImplemented: "Method not implemented"
 			case .unexpectedRecordType: "Unexpected record type"
