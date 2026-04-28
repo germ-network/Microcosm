@@ -69,3 +69,21 @@ extension Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc: Atproto.XRPC.ResponseP
 		[.badRequest]
 	}
 }
+
+extension Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output {
+	public var didDocument: Atproto.DIDDocument {
+		.init(
+			context: [],
+			id: did.rawValue,
+			alsoKnownAs: ["at://" + handle.rawValue],
+			verificationMethod: [],
+			service: [
+				.init(
+					id: "#atproto_pds",
+					type: "AtprotoPersonalDataServer",
+					serviceEndpoint: pds
+				)
+			]
+		)
+	}
+}
