@@ -5,8 +5,8 @@ import Foundation
 import Microcosm
 import Mockable
 
-extension Microcosm {
-	public struct MockSlingshot: SlingshotInterface {
+extension Slingshot {
+	public struct Mock: Interface {
 		public init() {}
 
 		public func request<X>(
@@ -16,7 +16,7 @@ extension Microcosm {
 			if let mockableType = X.self as? Mockable.Type {
 				return try (mockableType.mock() as? X.Output).tryUnwrap
 			}
-			throw Microcosm.Errors.notImplemented
+			throw MicrocosmErrors.notImplemented
 		}
 	}
 }

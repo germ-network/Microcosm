@@ -20,7 +20,7 @@ extension Atproto.XRPC.ProxyCallable {
 		let proxyHost = try Microcosm.Slingshot.defaultServiceURL
 			.tryUnwrap
 			.host(percentEncoded: true)
-			.tryUnwrap(Microcosm.Errors.improperServiceUrl)
+			.tryUnwrap(MicrocosmErrors.improperServiceUrl)
 
 		return try await call(
 			X.self,

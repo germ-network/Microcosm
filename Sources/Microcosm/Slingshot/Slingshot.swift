@@ -10,8 +10,19 @@ import AtprotoTypes
 import Foundation
 import GermConvenience
 
-extension Microcosm {
-	public protocol SlingshotInterface: Sendable {
+public struct Slingshot {
+	public static let defaultServiceURL = URL(
+		string: "https://slingshot.microcosm.blue")
+	
+	let resourceFetcher: HTTPFetcher
+	
+	public init(resourceFetcher: HTTPFetcher) {
+		self.resourceFetcher = resourceFetcher
+	}
+}
+
+extension Slingshot {
+	public protocol Interface: Sendable {
 		func request<X: Atproto.XRPC.Request>(
 			_: X.Type,
 			parameters: X.Parameters,
@@ -23,18 +34,7 @@ extension Microcosm {
 	}
 }
 
-extension Microcosm {
-	public struct Slingshot {
-		public static let defaultServiceURL = URL(
-			string: "https://slingshot.microcosm.blue")
 
-		let resourceFetcher: HTTPFetcher
-
-		public init(resourceFetcher: HTTPFetcher) {
-			self.resourceFetcher = resourceFetcher
-		}
-	}
-}
 
 extension Microcosm.Slingshot: Atproto.XRPC.Callable {
 	public func response(
@@ -49,7 +49,7 @@ extension Microcosm.Slingshot: Atproto.XRPC.Callable {
 
 }
 
-extension Microcosm.Slingshot: Microcosm.SlingshotInterface {
+extension Slingshot: Slingshot.Interface {
 	public func request<X>(
 		_: X.Type,
 		parameters: X.Parameters
@@ -58,9 +58,9 @@ extension Microcosm.Slingshot: Microcosm.SlingshotInterface {
 	}
 }
 
-extension Microcosm.SlingshotInterface {
+extension Slingshot.Interface {
 	public func resolveHandle(_ handle: Atproto.Handle) async throws -> AtprotoTypes.Atproto.DID? {
-		throw Microcosm.Errors.notImplemented
+		throw MicrocosmErrors.notImplemented
 	}
 
 	public func resolveMiniDoc(identifier: LexiconString.AtIdentifier)
@@ -72,11 +72,11 @@ extension Microcosm.SlingshotInterface {
 				Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.self,
 				parameters: .init(identifier: identifier),
 			)
-		} catch Microcosm.Errors.requestFailed(400, let error) {
+		} catch MicrocosmErrors.requestFailed(400, let error) {
 			if error == "RecordNotFound" {
 				return nil
 			} else {
-				throw Microcosm.Errors.requestFailed(
+				throw MicrocosmErrors.requestFailed(
 					responseStatus: .badRequest, error: error)
 			}
 		}
