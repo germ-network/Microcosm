@@ -11,20 +11,21 @@ let package = Package(
 		.library(
 			name: "Microcosm",
 			targets: ["Microcosm"]
-		)
+		),
+		.library(name: "MicrocosmMocks", targets: ["MicrocosmMocks"]),
 	],
 	dependencies: [
 		.package(
 			url: "https://github.com/germ-network/AtprotoTypes.git",
-			from: "0.3.0"
+			from: "0.4.0"
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
-			from: "0.1.0"
+			from: "0.1.5"
 		),
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.5.1"
+			from: "0.5.3"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
@@ -40,9 +41,17 @@ let package = Package(
 				.product(name: "HTTPTypes", package: "swift-http-types"),
 			]
 		),
+		.target(
+			name: "MicrocosmMocks",
+			dependencies: [
+				"Microcosm",
+				.product(name: "AtprotoTypesMocks", package: "AtprotoTypes"),
+				.product(name: "Mockable", package: "AtprotoTypes"),
+			]
+		),
 		.testTarget(
 			name: "MicrocosmTests",
-			dependencies: ["Microcosm"]
+			dependencies: ["Microcosm", "MicrocosmMocks"]
 		),
 	]
 )
