@@ -16,7 +16,7 @@ package enum MicrocosmErrors: LocalizedError {
 	case couldntConstructUrl
 	case nonHTTPResponse
 	case requestFailed(responseStatus: HTTPResponse.Status, error: String)
-	
+
 	package var errorDescription: String? {
 		switch self {
 		case .notImplemented: "Method not implemented"

@@ -13,9 +13,9 @@ import GermConvenience
 public struct Slingshot {
 	public static let defaultServiceURL = URL(
 		string: "https://slingshot.microcosm.blue")
-	
+
 	let resourceFetcher: HTTPFetcher
-	
+
 	public init(resourceFetcher: HTTPFetcher) {
 		self.resourceFetcher = resourceFetcher
 	}
@@ -33,8 +33,6 @@ extension Slingshot {
 			-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
 	}
 }
-
-
 
 extension Microcosm.Slingshot: Atproto.XRPC.Callable {
 	public func response(
@@ -59,7 +57,9 @@ extension Slingshot: Slingshot.Interface {
 }
 
 extension Slingshot.Interface {
-	public func resolveHandle(_ handle: Atproto.Handle) async throws -> AtprotoTypes.Atproto.DID? {
+	public func resolveHandle(_ handle: Atproto.Handle) async throws -> AtprotoTypes.Atproto
+		.DID?
+	{
 		throw MicrocosmErrors.notImplemented
 	}
 
