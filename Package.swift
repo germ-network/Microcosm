@@ -17,17 +17,15 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/germ-network/AtprotoTypes.git",
-			//			from: "0.3.0"
-			branch: "reorg/rename+mocks"
+			from: "0.4.0"
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
-			from: "0.1.0"
+			from: "0.1.5"
 		),
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			//			from: "0.5.1"
-			branch: "reorg/rename-mocks"
+			from: "0.5.3"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
