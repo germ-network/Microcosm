@@ -9,6 +9,12 @@ extension Slingshot {
 	public struct Mock: Interface {
 		public init() {}
 
+		public func resolveHandle(_: AtprotoTypes.Atproto.Handle) async throws
+			-> AtprotoTypes.Atproto.DID?
+		{
+			throw MicrocosmErrors.notImplemented
+		}
+
 		public func request<X>(
 			_: X.Type,
 			parameters: X.Parameters

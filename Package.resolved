@@ -1,5 +1,5 @@
 {
-  "originHash" : "52fa85a7e71ba22e08220c84c68b78908840c1c53abac86052045d92dd3319fb",
+  "originHash" : "9d6ecfe9c10b59d387c607bd4b4b8b9445b928ceffde86a891c5ef2571436848",
   "pins" : [
     {
       "identity" : "atprotoclient",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/germ-network/AtprotoClient.git",
       "state" : {
         "branch" : "fix/handleValidation",
-        "revision" : "f9019285697c2e78581afae9edbad9c12d7d25ac"
+        "revision" : "5c528324a9d051e224a19801aafb06fc7609e18d"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/germ-network/AtprotoTypes.git",
       "state" : {
         "branch" : "fix/handleValidation",
-        "revision" : "969b33c565da58b675f56eee8dc2521a354786d3"
+        "revision" : "7dc7ecd115c883a087749bb89614c2a6a46d3d16"
       }
     },
     {
