@@ -28,15 +28,31 @@ extension Slingshot.Resolver: Atproto.Resolver {
 	}
 
 	public func resolve(did: Atproto.DID) async throws -> Atproto.DIDDocument? {
-		try await slingshot.resolveMiniDoc(identifier: .did(did))?
-			.didDocument
+		let miniDoc = try await slingshot.resolveMiniDoc(identifier: .did(did))
+
+		guard let miniDoc else {
+			return nil
+		}
+
+		guard miniDoc.did == did else {
+			throw Slingshot.Errors.didMismatch
+		}
+
+		return miniDoc.didDocument
 	}
 
 	public func verifiedResolve(handle: Atproto.Handle) async throws -> Atproto.DIDDocument
 		.Verified?
 	{
-		try await slingshot.resolveMiniDoc(identifier: .handle(handle))?
+		let miniDoc = try await slingshot.resolveMiniDoc(identifier: .handle(handle))
+
+		guard let miniDoc else {
+			return nil
+		}
+
+		return
+			try miniDoc
 			.didDocument
-			.verified(expecting: handle)
+			.verified(expecting: handle, did: miniDoc.did)
 	}
 }

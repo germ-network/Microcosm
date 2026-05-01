@@ -7,7 +7,7 @@
       "location" : "https://github.com/germ-network/AtprotoClient.git",
       "state" : {
         "branch" : "fix/handleValidation",
-        "revision" : "5c528324a9d051e224a19801aafb06fc7609e18d"
+        "revision" : "e940e5cba73469292e0a73342587f4eecc9bdaec"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/germ-network/AtprotoTypes.git",
       "state" : {
         "branch" : "fix/handleValidation",
-        "revision" : "7dc7ecd115c883a087749bb89614c2a6a46d3d16"
+        "revision" : "50768db5e8f9fa7c6b7c979105b9557668aa1f49"
       }
     },
     {

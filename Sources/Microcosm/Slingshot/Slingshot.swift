@@ -19,6 +19,17 @@ public struct Slingshot {
 	public init(resourceFetcher: HTTPFetcher) {
 		self.resourceFetcher = resourceFetcher
 	}
+
+	enum Errors: LocalizedError {
+		case didMismatch
+
+		var errorDescription: String? {
+			switch self {
+			case .didMismatch:
+				"Mismatched did's"
+			}
+		}
+	}
 }
 
 extension Slingshot {
