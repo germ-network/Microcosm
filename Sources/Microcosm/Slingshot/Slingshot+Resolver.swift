@@ -16,7 +16,7 @@ extension Slingshot {
 	public struct Resolver {
 		let slingshot: Slingshot
 
-		init(resourceFetcher: HTTPFetcher) {
+		public init(resourceFetcher: HTTPFetcher) {
 			self.slingshot = .init(resourceFetcher: resourceFetcher)
 		}
 	}
