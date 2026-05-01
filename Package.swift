@@ -25,7 +25,8 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.5.3"
+			//			from: "0.5.3"
+			branch: "fix/handleValidation"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
