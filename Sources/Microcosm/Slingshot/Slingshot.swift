@@ -19,6 +19,17 @@ public struct Slingshot {
 	public init(resourceFetcher: HTTPFetcher) {
 		self.resourceFetcher = resourceFetcher
 	}
+
+	enum Errors: LocalizedError {
+		case didMismatch
+
+		var errorDescription: String? {
+			switch self {
+			case .didMismatch:
+				"Mismatched did's"
+			}
+		}
+	}
 }
 
 extension Slingshot {
@@ -56,13 +67,18 @@ extension Slingshot: Slingshot.Interface {
 	}
 }
 
-extension Slingshot.Interface {
-	public func resolveHandle(_ handle: Atproto.Handle) async throws -> AtprotoTypes.Atproto
-		.DID?
-	{
-		throw MicrocosmErrors.notImplemented
+extension Slingshot {
+	public func resolveHandle(
+		_ handle: Atproto.Handle
+	) async throws -> Atproto.DID? {
+		try await callExpectingOptional(
+			Lexicon.Com.Atproto.Identity.ResolveHandle.self,
+			parameters: .init(handle: handle)
+		)?.did
 	}
+}
 
+extension Slingshot.Interface {
 	public func resolveMiniDoc(identifier: LexiconString.AtIdentifier)
 		async throws
 		-> Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output?
