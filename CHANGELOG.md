@@ -1,5 +1,11 @@
 # @germ-network/microcosm
 
+## 0.3.2
+
+### Patch Changes
+
+- [#15](https://github.com/germ-network/Microcosm/pull/15) [`8c181f4`](https://github.com/germ-network/Microcosm/commit/8c181f47ba628dde660f8bc97b07899078f5fb06) Thanks [@germ-mark](https://github.com/germ-mark)! - adopt handle validation
+
 ## 0.3.1
 
 ### Patch Changes
