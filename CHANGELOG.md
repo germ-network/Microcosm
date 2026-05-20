@@ -1,5 +1,11 @@
 # @germ-network/microcosm
 
+## 0.3.3
+
+### Patch Changes
+
+- [#17](https://github.com/germ-network/Microcosm/pull/17) [`24bf366`](https://github.com/germ-network/Microcosm/commit/24bf366bcc8f9fc0c6769dd1e70bcc58fb7a9122) Thanks [@germ-mark](https://github.com/germ-mark)! - bump dependencies to consistent use of safe httpresponse init, narrow http imports"
+
 ## 0.3.2
 
 ### Patch Changes
