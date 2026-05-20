@@ -1,13 +1,13 @@
 {
-  "originHash" : "cf8fa08c741765d41c6f74282f201e1900823025b86270e19955e366eb81a9ea",
+  "originHash" : "99d3ab02a15f12d5e27c26e770f041b5493829070090625708db51eba843b29f",
   "pins" : [
     {
       "identity" : "atprotoclient",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/germ-network/AtprotoClient.git",
       "state" : {
-        "branch" : "fix/imports",
-        "revision" : "433f819a0256d7c6b54cf3fe9907e7a9ec7f01bf"
+        "revision" : "c92abfd74defeb60c09b45b8ab11e215987920a3",
+        "version" : "0.5.7"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/germ-network/AtprotoTypes.git",
       "state" : {
-        "branch" : "fix/reduce-imports",
-        "revision" : "28d0cf00c2c7459a354913308beb1f554f98a400"
+        "revision" : "12207f3ede15d1a4e6997a0bac6b3718400d2a5f",
+        "version" : "0.4.5"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/germ-network/GermConvenience.git",
       "state" : {
-        "branch" : "fix/http-scheme-precondition",
-        "revision" : "8e9ce216aadb82b336cfcde655d3bab37a453398"
+        "revision" : "af36c703ecbf25db5528a9c7c81fa33f04645ad7",
+        "version" : "0.2.1"
       }
     },
     {
