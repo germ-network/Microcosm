@@ -6,6 +6,7 @@
 //
 import Foundation
 import HTTPTypes
+import struct HTTPTypes.HTTPResponse
 
 package enum MicrocosmErrors: LocalizedError {
 	case notImplemented
