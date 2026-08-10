@@ -1,3 +1,5 @@
+[![Apple](https://github.com/germ-network/Microcosm/actions/workflows/ci-apple.yml/badge.svg)](https://github.com/germ-network/Microcosm/actions/workflows/ci-apple.yml)
+
 
 
 ### Linting and Practices
