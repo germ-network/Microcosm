@@ -1,3 +1,6 @@
+[![Apple](https://github.com/germ-network/Microcosm/actions/workflows/ci-apple.yml/badge.svg)](https://github.com/germ-network/Microcosm/actions/workflows/ci-apple.yml)
+[![Android](https://github.com/germ-network/Microcosm/actions/workflows/ci-android.yml/badge.svg)](https://github.com/germ-network/Microcosm/actions/workflows/ci-android.yml)
+
 
 
 ### Linting and Practices
