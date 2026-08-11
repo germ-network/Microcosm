@@ -3,6 +3,10 @@ import Foundation
 import Microcosm
 import Testing
 
+#if canImport(FoundationNetworking)
+	import FoundationNetworking
+#endif
+
 struct OnlineTests {
 	let handle: Atproto.Handle
 	let did: Atproto.DID
