@@ -2,6 +2,7 @@ import AtprotoClient
 import AtprotoTypes
 import Foundation
 import GermConvenience
+
 import struct HTTPTypes.HTTPResponse
 
 //https://slingshot.microcosm.blue/#tag/slingshot-specific-queries/GET/xrpc/blue.microcosm.identity.resolveMiniDoc
