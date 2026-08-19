@@ -32,7 +32,9 @@ struct MiniDocDocumentTests {
 	///plc.directory always emits the fully-qualified form, and a consumer
 	///racing this resolver against that one shouldn't see two documents that
 	///differ in shape depending on which won.
-	@Test("the published method matches plc.directory's shape, not just RepoSigningKey's matcher")
+	@Test(
+		"the published method matches plc.directory's shape, not just RepoSigningKey's matcher"
+	)
 	func matchesPlcDirectoryShape() throws {
 		let miniDoc = try Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output.mock()
 		let method = try #require(miniDoc.didDocument.verificationMethod?.first)
