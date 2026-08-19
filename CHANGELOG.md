@@ -1,5 +1,25 @@
 # @germ-network/microcosm
 
+## 0.4.0
+
+### Minor Changes
+
+- [#21](https://github.com/germ-network/Microcosm/pull/21) [`e79a586`](https://github.com/germ-network/Microcosm/commit/e79a586a1f1085cd1aa0e80c2e6828e414da0124) Thanks [@germ-mark](https://github.com/germ-mark)! - `resolveMiniDoc`'s `Atproto.DIDDocument` adapter now publishes the `#atproto` verification method instead of an empty list. Slingshot returns `signing_key` on the wire and the adapter discarded it, so a repo proof checked against a Slingshot-resolved document failed for want of a key — nondeterministically, since `optimizedResolve` races this resolver against plc.directory and either can win. The method is spelled the way plc.directory spells it — fully-qualified `did:...#atproto` id, `Multikey`, self-controlled — so the two resolvers now agree field for field.
+
+  Requires AtprotoTypes 0.5.1, where `VerificationMethod`'s initializer became public.
+
+### Patch Changes
+
+- [#19](https://github.com/germ-network/Microcosm/pull/19) [`5fddb86`](https://github.com/germ-network/Microcosm/commit/5fddb866f2b986c008ae89b2abd54dfe2c535d7a) Thanks [@germ-mark](https://github.com/germ-mark)! - Add Android CI, gating the one FoundationNetworking site.
+
+  `Tests/MicrocosmTests/MicrocosmTests.swift` constructs `Slingshot.Resolver` with
+  `URLSession.shared` directly — the only real usage in the package, since `Sources/`
+  sweeps clean. Gated on `canImport`, so the Apple build is unchanged.
+
+  Verified with a clean Android cross-build including the test target
+  (`swift build --build-tests --swift-sdk aarch64-unknown-linux-android28`) — builds and
+  links green from an empty `.build`.
+
 ## 0.3.3
 
 ### Patch Changes
