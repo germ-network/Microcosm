@@ -27,6 +27,21 @@ struct MiniDocDocumentTests {
 		#expect(key.compressedPoint.count == 33)
 	}
 
+	///`RepoSigningKey`'s matcher accepts a bare `#atproto` fragment too, so the
+	///test above can't tell the fully-qualified form from that one — but
+	///plc.directory always emits the fully-qualified form, and a consumer
+	///racing this resolver against that one shouldn't see two documents that
+	///differ in shape depending on which won.
+	@Test("the published method matches plc.directory's shape, not just RepoSigningKey's matcher")
+	func matchesPlcDirectoryShape() throws {
+		let miniDoc = try Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output.mock()
+		let method = try #require(miniDoc.didDocument.verificationMethod?.first)
+
+		#expect(method.id == miniDoc.did.rawValue + "#atproto")
+		#expect(method.type == "Multikey")
+		#expect(method.controller == miniDoc.did.rawValue)
+	}
+
 	///Guards the rest of the literal: the PDS entry sits in the same
 	///initializer the signing key was added to.
 	@Test("populating the signing key leaves the PDS entry reachable")
