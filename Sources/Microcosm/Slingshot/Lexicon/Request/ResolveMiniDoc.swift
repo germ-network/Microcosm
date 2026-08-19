@@ -71,12 +71,26 @@ extension Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc: Atproto.XRPC.ResponseP
 }
 
 extension Lexicon.Blue.Microcosm.Identity.ResolveMiniDoc.Output {
+	///Slingshot returns the repo signing key on the wire, so the document it
+	///backs can carry it rather than making a consumer re-resolve through
+	///plc.directory for the one field a repo proof needs.
 	public var didDocument: Atproto.DIDDocument {
 		.init(
 			context: [],
 			id: did.rawValue,
 			alsoKnownAs: ["at://" + handle.rawValue],
-			verificationMethod: [],
+			//spelled the way plc.directory spells it — fully-qualified id,
+			//`Multikey`, self-controlled — because `optimizedResolve` races
+			//this resolver against that one, and a consumer holding the result
+			//should not be able to tell which won.
+			verificationMethod: [
+				.init(
+					id: did.rawValue + "#atproto",
+					type: "Multikey",
+					controller: did.rawValue,
+					publicKeyMultibase: signingKey
+				)
+			],
 			service: [
 				.init(
 					id: "#atproto_pds",

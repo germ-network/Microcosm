@@ -16,8 +16,9 @@ let package = Package(
 	],
 	dependencies: [
 		.package(
+			//0.5.1 is the release that makes VerificationMethod.init public
 			url: "https://github.com/germ-network/AtprotoTypes.git",
-			from: "0.4.5"
+			from: "0.5.1"
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
@@ -51,7 +52,11 @@ let package = Package(
 		),
 		.testTarget(
 			name: "MicrocosmTests",
-			dependencies: ["Microcosm", "MicrocosmMocks"]
+			dependencies: [
+				"Microcosm",
+				"MicrocosmMocks",
+				.product(name: "AtprotoTypesVerify", package: "AtprotoTypes"),
+			]
 		),
 	]
 )
