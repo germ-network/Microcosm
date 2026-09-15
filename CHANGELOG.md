@@ -1,5 +1,17 @@
 # @germ-network/microcosm
 
+## 0.4.1
+
+### Patch Changes
+
+- [#23](https://github.com/germ-network/Microcosm/pull/23) [`b8e0f53`](https://github.com/germ-network/Microcosm/commit/b8e0f530be489527678410bfcbe55360bd0e56f1) Thanks [@germ-mark](https://github.com/germ-mark)! - Fix build against GermConvenience 0.8.0, which split `HTTPFetcher` and
+  `HTTPDataResponse` out of the base `GermConvenience` library into a new
+  `GermConvenienceHTTP` product. Adds the `GermConvenienceHTTP` product
+  dependency and the matching import, and raises the floor to `from: "0.8.0"`.
+
+  No public API change — this only restores buildability against current
+  GermConvenience releases.
+
 ## 0.4.0
 
 ### Minor Changes
