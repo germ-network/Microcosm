@@ -9,6 +9,7 @@ import AtprotoClient
 import AtprotoTypes
 import Foundation
 import GermConvenience
+import GermConvenienceHTTP
 
 ///a struct wrapping a Slingshot object that hides the Slingshot API and conforms to Atproto.Resolver
 

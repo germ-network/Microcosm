@@ -9,6 +9,7 @@ import AtprotoClient
 import AtprotoTypes
 import Foundation
 import GermConvenience
+import GermConvenienceHTTP
 
 public struct Slingshot {
 	public static let defaultServiceURL = URL(

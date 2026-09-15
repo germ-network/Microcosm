@@ -22,11 +22,14 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
-			from: "0.2.1"
+			// 0.8.0 split HTTP helpers into GermConvenienceHTTP — the floor this
+			// package now needs for HTTPFetcher/HTTPDataResponse.
+			from: "0.8.0"
 		),
+		//0.9.0 carries the GermConvenienceHTTP-adoption fix for 0.8.0.
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.5.8"
+			from: "0.9.0"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
@@ -39,6 +42,7 @@ let package = Package(
 				"AtprotoTypes",
 				"AtprotoClient",
 				"GermConvenience",
+				.product(name: "GermConvenienceHTTP", package: "GermConvenience"),
 				.product(name: "HTTPTypes", package: "swift-http-types"),
 			]
 		),
