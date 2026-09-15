@@ -26,12 +26,10 @@ let package = Package(
 			// package now needs for HTTPFetcher/HTTPDataResponse.
 			from: "0.8.0"
 		),
-		//TEMPORARY: revision-pinned to the open GermConvenienceHTTP-adoption
-		//PR's branch tip (germ-network/AtprotoClient#53) — no tagged release
-		//exists yet. Re-pin to a tag once that PR merges and releases.
+		//0.9.0 carries the GermConvenienceHTTP-adoption fix for 0.8.0.
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			revision: "a7caa14942d931b0139282f272c46e4df8ba04bd"
+			from: "0.9.0"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
