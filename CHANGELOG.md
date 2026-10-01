@@ -1,5 +1,11 @@
 # @germ-network/microcosm
 
+## 0.4.2
+
+### Patch Changes
+
+- [#26](https://github.com/germ-network/Microcosm/pull/26) [`a8292bf`](https://github.com/germ-network/Microcosm/commit/a8292bfe3ac75f6f6322e20b1bb0cc25feb86e33) Thanks [@germ-mark](https://github.com/germ-mark)! - Require AtprotoClient 0.12.0 and GermConvenience 0.14.0 (which brings swift-crypto 5 and AtprotoTypes 0.7.0), and depend on `GermConvenienceURLSession` from the tests that use `URLSession`. A `URLSession` conforms to `HTTPFetcher` from that product, so callers passing one as a `resourceFetcher` add it. Android CI now checks that the library does not link FoundationNetworking.
+
 ## 0.4.1
 
 ### Patch Changes
