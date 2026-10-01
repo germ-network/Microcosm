@@ -22,14 +22,15 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
-			// 0.8.0 split HTTP helpers into GermConvenienceHTTP — the floor this
-			// package now needs for HTTPFetcher/HTTPDataResponse.
-			from: "0.8.0"
+			// 0.14.0 is the floor AtprotoClient 0.12.0 needs; the tests use
+			// GermConvenienceURLSession, where URLSession's HTTPFetcher
+			// conformance lives.
+			from: "0.14.0"
 		),
-		//0.9.0 carries the GermConvenienceHTTP-adoption fix for 0.8.0.
+		//0.12.0 requires GermConvenience 0.14.0.
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.9.0"
+			from: "0.12.0"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
@@ -60,6 +61,7 @@ let package = Package(
 				"Microcosm",
 				"MicrocosmMocks",
 				.product(name: "AtprotoTypesVerify", package: "AtprotoTypes"),
+				.product(name: "GermConvenienceURLSession", package: "GermConvenience"),
 			]
 		),
 	]
