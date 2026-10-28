@@ -16,21 +16,19 @@ let package = Package(
 	],
 	dependencies: [
 		.package(
-			//0.5.1 is the release that makes VerificationMethod.init public
 			url: "https://github.com/germ-network/AtprotoTypes.git",
-			from: "0.5.1"
+			revision: "16d75d5888225701a8e568d110ae640c3b6e1eef"
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
-			// 0.14.0 is the floor AtprotoClient 0.12.0 needs; the tests use
+			// 0.15.0 includes the Swift API naming updates.
 			// GermConvenienceURLSession, where URLSession's HTTPFetcher
 			// conformance lives.
-			from: "0.14.0"
+			from: "0.15.0"
 		),
-		//0.12.0 requires GermConvenience 0.14.0.
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.12.0"
+			branch: "mark/api-guidelines-atprotoclient"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
