@@ -52,8 +52,8 @@ extension Lexicon.Blue.Microcosm.Identity {
 				self.identifier = identifier
 			}
 
-			public func asQueryItems() -> [URLQueryItem] {
-				return [
+			public var queryItems: [URLQueryItem] {
+				[
 					.init(name: "identifier", value: identifier.rawValue)
 				]
 			}

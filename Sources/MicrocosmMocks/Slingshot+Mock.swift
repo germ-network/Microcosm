@@ -20,7 +20,7 @@ extension Slingshot {
 			parameters: X.Parameters
 		) async throws -> X.Output where X: Atproto.XRPC.Request {
 			if let mockableType = X.self as? Mockable.Type {
-				return try (mockableType.mock() as? X.Output).tryUnwrap
+				return try (mockableType.mock() as? X.Output).unwrapped
 			}
 			throw MicrocosmErrors.notImplemented
 		}
