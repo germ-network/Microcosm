@@ -58,8 +58,12 @@ let package = Package(
 			dependencies: [
 				"Microcosm",
 				"MicrocosmMocks",
+				.product(name: "AtprotoClient", package: "AtprotoClient"),
 				.product(name: "AtprotoTypesVerify", package: "AtprotoTypes"),
-				.product(name: "GermConvenienceURLSession", package: "GermConvenience"),
+				.product(
+					name: "GermConvenienceURLSession",
+					package: "GermConvenience"
+				),
 			]
 		),
 	]

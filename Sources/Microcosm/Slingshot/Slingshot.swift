@@ -50,7 +50,7 @@ extension Microcosm.Slingshot: Atproto.XRPC.Callable {
 	public func response(
 		_ requestComponents: XRPCRequestComponents
 	) async throws -> HTTPDataResponse {
-		let defaultService = try Self.defaultServiceURL.tryUnwrap
+		let defaultService = try Self.defaultServiceURL.unwrapped
 		let request =
 			try requestComponents
 			.constructUrl(serviceUrl: defaultService)
