@@ -17,7 +17,7 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/germ-network/AtprotoTypes.git",
-			revision: "16d75d5888225701a8e568d110ae640c3b6e1eef"
+			from: "0.11.0"
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
@@ -28,7 +28,7 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			branch: "mark/api-guidelines-atprotoclient"
+			from: "0.14.0"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],
