@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
 	name: "Microcosm",
-	platforms: [.iOS(.v16), .macOS(.v15)],
+	platforms: [.iOS(.v18), .macOS(.v15)],
 	products: [
 		// Products define the executables and libraries a package produces, making them visible to other packages.
 		.library(
@@ -17,18 +17,21 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/germ-network/AtprotoTypes.git",
-			from: "0.11.0"
+			// from: "0.11.0"
+			branch: "ci/repo-standard"
 		),
 		.package(
 			url: "https://github.com/germ-network/GermConvenience.git",
 			// 0.15.0 includes the Swift API naming updates.
 			// GermConvenienceURLSession, where URLSession's HTTPFetcher
 			// conformance lives.
-			from: "0.15.0"
+			// from: "0.15.0"
+			branch: "add-always-responder-to-mockhttpfetcher"
 		),
 		.package(
 			url: "https://github.com/germ-network/AtprotoClient.git",
-			from: "0.14.0"
+			// from: "0.14.0"
+			branch: "adopt-oauth4swift-10"
 		),
 		.package(url: "https://github.com/apple/swift-http-types.git", from: "1.5.1"),
 	],

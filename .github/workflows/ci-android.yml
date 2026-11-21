@@ -28,7 +28,11 @@ jobs:
         id: android
         uses: skiptools/swift-android-action@v2
         with:
-          swift-version: "6.3"
+          # Full patch version on purpose: the action derives the download URL
+          # from it, and swift.org has no bare `swift-6.4-RELEASE` directory.
+          # 6.4 is also the first release with an Ubuntu 26.04 host toolchain,
+          # which `ubuntu-latest` became in November 2026; 6.3 only 404s there.
+          swift-version: "6.4.2"
       # The library and its dependency closure must not link FoundationNetworking.
       # `--target` builds just that closure.
       - name: "Library does not link FoundationNetworking"
